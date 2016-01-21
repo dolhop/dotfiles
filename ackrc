@@ -1,0 +1,19 @@
+--pager=less -REX
+--type-set=mako=mako
+--smart-case
+--ignore-dir=build
+--ignore-dir=cfengine
+--ignore-dir=thirdparty
+--ignore-dir=iconfigs
+#--ignore-dir=sql
+--ignore-dir=.ropeproject
+--ignore-dir=.jump-venv
+--ignore-dir=.sup
+--ignore-dir=.heroku
+--ignore-dir=.coverage
+--ignore-dir=vendor
+--ignore-dir=.venv
+--ignore-dir=static/build
+--ignore-dir=static/build-debug
+--ignore-dir=staticfiles
+--ignore-file=is:tags
