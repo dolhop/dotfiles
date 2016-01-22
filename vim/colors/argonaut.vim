@@ -99,3 +99,6 @@ hi cssClassName guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=N
 hi cssValueLength guifg=#d70000 guibg=NONE gui=NONE ctermfg=160 ctermbg=NONE cterm=NONE
 hi cssCommonAttr guifg=#06960e guibg=NONE gui=NONE ctermfg=28 ctermbg=NONE cterm=NONE
 hi cssBraces guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
+
+" LWT settings
+hi SpellBad term=underline ctermbg=55 ctermfg=white guibg=Brown guifg=White
