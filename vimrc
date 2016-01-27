@@ -214,7 +214,7 @@ let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_complete_on_dot = 0
 " Do not let pymode automatically fold
 let g:pymode_folding = 1
-set foldlevel=1
+set foldlevel=99
 
 " Do not let pymode auto fix whitespaces
 let g:pymode_utils_whitespaces = 0

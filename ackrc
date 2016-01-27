@@ -1,4 +1,4 @@
---pager=less -REX
+--pager=less -ReX
 --type-set=mako=mako
 --smart-case
 --ignore-dir=build
