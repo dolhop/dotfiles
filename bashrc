@@ -7,9 +7,11 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+# don't put duplicate lines in the history. See bash(1) for more options
+export HISTCONTROL=ignoredups
+# ... and ignore same sucessive entries.
+export HISTCONTROL=ignoreboth
+
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -79,7 +81,7 @@ WHITE="\[\e[1;37m"
 DEFAULT="\[\e[0;39m"
 
 
-set -o vim  # vim style editing of command line
+set -o vi  # vim style editing of command line
 
 ################################################################################
 ## You may uncomment the following lines if you want `ls' to be colorized:
