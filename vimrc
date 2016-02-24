@@ -34,8 +34,8 @@ set nocompatible   " use vim settings, not vi
  NeoBundleFetch 'Shougo/neobundle.vim'  " Let NeoBundle manage NeoBundle
 
  "  MY BUNDLES
- NeoBundle 'jonathanfilip/vim-lucius'
- NeoBundle 'kien/ctrlp.vim'
+" NeoBundle 'jonathanfilip/vim-lucius'
+" NeoBundle 'kien/ctrlp.vim'
  NeoBundle 'klen/python-mode'
  NeoBundle 'scrooloose/syntastic'
  NeoBundle 'bling/vim-airline'
@@ -132,6 +132,7 @@ set hlsearch        " highlight serach terms
 set incsearch       " jump to search matches as you type
 set history=1000
 set cursorline
+set switchbuf+=usetab,newtab " use new tab from quickfix list
 
 if has("autocmd")
    " Enabled file type detection.  Use the default filetype settings.
@@ -197,8 +198,8 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " Use fuzzy finder buffer mode to open buffer
 "nmap <C-S-F> :PyLintAuto<CR>
-map <Leader>d :CtrlP .<CR>
-map <Leader>f :CtrlPBuffer<CR>
+"map <Leader>d :CtrlP .<CR>
+"map <Leader>f :CtrlPBuffer<CR>
 set wildignore+=*/coverage/*,*/build/*,*/node_modules/*,*/__pycache__/*,*.ttf,*.svg,*.pyc,*/build-debug/*
 " map <Leader>d :FufFileWithCurrentBufferDir<CR>
 
@@ -234,14 +235,18 @@ set completeopt=menuone,longest,preview
 " This auto close preview window if you exit the insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-set relativenumber
+"set relativenumber
 
 " run unittest
 nmap <Leader>t :!python3 manage.py test <cword>
 
 
 "******************* airline  *******************
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline_section_z="%p%% / %c / %l / %L tot"
 set laststatus=2
 
 
