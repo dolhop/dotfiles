@@ -66,11 +66,10 @@ if has("gui_running")
     :map <C-Right> :tabnext<cr>
     :map <C-S-tab> :tabprevious<cr>
     :map <C-tab> :tabnext<cr>
-
     "au GUIEnter * simalt ~x
     set guioptions-=T" no toolbar
-
 else
+
     "******************* colorscheme *******************
     set t_Co=256
     colorscheme delek   " default colorscheme
@@ -93,10 +92,8 @@ else
     :noremap [D :tabprevious<cr>
     :noremap [C :tabnext<cr>
 
-" ctrl+left/right - doesn't map well in putty
-" putty doesn't send ctrl, so it maps to just left/right too :(
-"    :noremap OD :tabprevious<cr>
-"    :noremap OC :tabnext<cr>
+    :noremap <ESC>[1;5D :tabprevious<cr>
+    :noremap <ESC>[1;5C :tabnext<cr>
 
 "    :noremap <C-Left> :tabprevious<cr>
 "    :noremap <C-Right> :tabnext<cr>
@@ -133,6 +130,7 @@ set incsearch       " jump to search matches as you type
 set history=1000
 set cursorline
 set switchbuf+=usetab,newtab " use new tab from quickfix list
+set t_ut=
 
 if has("autocmd")
    " Enabled file type detection.  Use the default filetype settings.
