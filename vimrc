@@ -4,7 +4,7 @@
 
 "******************* VIM directories *******************
 if has('win32') || has ('win64')
-    let $VIMHOME = $VIM."/vimfiles"
+    let $VIMHOME = $HOME."/vimfiles"
 else
     let $VIMHOME = $HOME."/.vim"
 endif
@@ -25,11 +25,12 @@ set directory=$SWAPDIR
 set nocompatible   " use vim settings, not vi
 
 "******************* NEOBUNDLE *******************
+if isdirectory($VIMHOME."/bundle/neobundle.vim")
  if has('vim_starting')
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
+   set runtimepath+=$VIMHOME."/bundle/neobundle.vim"
  endif
 
- call neobundle#begin(expand('~/.vim/bundle/'))
+ call neobundle#begin(expand($VIMHOME.'/bundle/'))
 
  NeoBundleFetch 'Shougo/neobundle.vim'  " Let NeoBundle manage NeoBundle
 
@@ -40,10 +41,10 @@ set nocompatible   " use vim settings, not vi
  NeoBundle 'scrooloose/syntastic'
  NeoBundle 'bling/vim-airline'
  NeoBundle 'mileszs/ack.vim'
- NeoBundle 'digitaltoad/vim-jade'
- NeoBundle 'pangloss/vim-javascript'
- NeoBundle 'maksimr/vim-jsbeautify'
- NeoBundle 'ervandew/supertab'
+" NeoBundle 'digitaltoad/vim-jade'
+" NeoBundle 'pangloss/vim-javascript'
+" NeoBundle 'maksimr/vim-jsbeautify'
+" NeoBundle 'ervandew/supertab'
  NeoBundle 'saltstack/salt-vim'
  NeoBundle 'scrooloose/nerdtree'
 
@@ -52,6 +53,7 @@ set nocompatible   " use vim settings, not vi
  " If there are uninstalled bundles found on startup,
  " this will conveniently prompt you to install them.
  NeoBundleCheck
+endif
 
 
 if has("gui_running")
@@ -68,6 +70,7 @@ if has("gui_running")
     :map <C-tab> :tabnext<cr>
     "au GUIEnter * simalt ~x
     set guioptions-=T" no toolbar
+    set guifont=Courier_new:h11
 else
 
     "******************* colorscheme *******************
@@ -102,7 +105,8 @@ else
 "
     " mouse requires an xterm terminal type and putty->terminal->disable application keypad
     set mouse=nv      " enable mouse in console mode
-    set clipboard=autoselect,exclude:.*
+    "set clipboard=autoselect,exclude:.*
+    set clipboard=unnamed
 endif   " console mode
 
 "******************* misc control  *******************
@@ -188,11 +192,11 @@ let g:syntastic_python_checkers = ['flake8']
 "********************************************************************
 " *********************** CONAN section *****************************
 "
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"
 
 " Use fuzzy finder buffer mode to open buffer
 "nmap <C-S-F> :PyLintAuto<CR>
@@ -224,19 +228,19 @@ let g:pymode_lint_cwindow = 0
 
 
 "******************* supertab  *******************
-imap <tab> <C-Space>
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SupertabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose = 1
-set completeopt=menuone,longest,preview
-
-" This auto close preview window if you exit the insert mode
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"imap <tab> <C-Space>
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SupertabDefaultCompletionType = "context"
+"let g:SuperTabClosePreviewOnPopupClose = 1
+"set completeopt=menuone,longest,preview
+"
+"" This auto close preview window if you exit the insert mode
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 "set relativenumber
 
 " run unittest
-nmap <Leader>t :!python3 manage.py test <cword>
+"nmap <Leader>t :!python3 manage.py test <cword>
 
 
 "******************* airline  *******************
