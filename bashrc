@@ -118,3 +118,6 @@ alias greph='find . -name "*.h" |xargs grep -n --color=auto $*'
 alias test_migrate='JUMP_DB_NAME=test_nectar python manage.py migrate'
 alias print_colors='for ((color = 0; color <= 255; color++)); do tput setaf "$color"; printf "$color test\n"; done'
 
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh

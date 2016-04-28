@@ -2,6 +2,37 @@
 " Note: Skip initialization for vim-tiny or vim-small.
  if 0 | endif
 
+"NeoBundle Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+set runtimepath^=/home/leo/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('/home/leo/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+call neobundle#end()
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+
+
+
 "******************* VIM directories *******************
 if has('win32') || has ('win64')
     let $VIMHOME = $HOME."/vimfiles"
@@ -21,8 +52,6 @@ if !isdirectory($SWAPDIR)
     call mkdir($SWAPDIR, "p")
 endif
 set directory=$SWAPDIR
-
-set nocompatible   " use vim settings, not vi
 
 "******************* NEOBUNDLE *******************
 if isdirectory($VIMHOME."/bundle/neobundle.vim")
@@ -70,7 +99,7 @@ if has("gui_running")
     :map <C-tab> :tabnext<cr>
     "au GUIEnter * simalt ~x
     set guioptions-=T" no toolbar
-    set guifont=Courier_new:h11
+    set guifont=Mono
 else
 
     "******************* colorscheme *******************
@@ -160,6 +189,7 @@ map <F8> :!/usr/bin/ctags -R .<CR>
 let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 30
 map <F4> :TlistToggle<cr>
+map <F2> :lnext<cr>
 
 "******************* style formatting control  *******************
 " highlight extra long lines
@@ -225,7 +255,6 @@ let g:pymode_lint_checkers = '[pyflakes,mccabe]'
 
 " DO NOT Auto open cwindow if errors be finded
 let g:pymode_lint_cwindow = 0
-
 
 "******************* supertab  *******************
 "imap <tab> <C-Space>

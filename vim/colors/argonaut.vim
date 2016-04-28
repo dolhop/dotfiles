@@ -10,7 +10,7 @@ endif
 
 let g:colors_name = "argonaut"
 
-hi Cursor guifg=NONE guibg=#ff2200 gui=NONE ctermfg=NONE ctermbg=196 cterm=NONE
+hi Cursor guifg=NONE guibg=DarkOrange3 gui=NONE ctermfg=NONE ctermbg=166 cterm=NONE
 hi Visual guifg=NONE guibg=#002fFF gui=NONE ctermfg=NONE ctermbg=12 cterm=NONE
 hi CursorLine guifg=NONE guibg=#000c16 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
 hi CursorColumn guifg=NONE guibg=#000c16 gui=NONE ctermfg=NONE ctermbg=16 cterm=NONE
