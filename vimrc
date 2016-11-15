@@ -7,21 +7,11 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-set runtimepath^=/home/leo/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('/home/leo/.vim/bundle'))
+set runtimepath^=/home/encelium/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('/home/encelium/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
 call neobundle#end()
 filetype plugin indent on
@@ -74,8 +64,8 @@ if isdirectory($VIMHOME."/bundle/neobundle.vim")
 " NeoBundle 'pangloss/vim-javascript'
 " NeoBundle 'maksimr/vim-jsbeautify'
 " NeoBundle 'ervandew/supertab'
- NeoBundle 'saltstack/salt-vim'
- NeoBundle 'scrooloose/nerdtree'
+" NeoBundle 'saltstack/salt-vim'
+" NeoBundle 'scrooloose/nerdtree'
 
  call neobundle#end()
 
@@ -286,8 +276,8 @@ set laststatus=2
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" C-n to toggle
-map <C-n> :NERDTreeToggle<CR>
-
-" Close vim if Nerd tree is the only window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " C-n to toggle
+" map <C-n> :NERDTreeToggle<CR>
+"
+" " Close vim if Nerd tree is the only window open
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

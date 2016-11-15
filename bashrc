@@ -31,10 +31,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -111,13 +107,13 @@ alias vim='vim -X -p '
 alias gvim='gvim -p '
 alias mount='sudo mount'
 alias umount='sudo umount'
-alias grepy='find . -name "*.py" |xargs grep -n --color=auto $*'
-alias grepjs='find . -name "*.js" |xargs grep -n --color=auto $*'
-alias grepch='find . -name "*.cpp" -o -name "*.c" -o -name "*.h" |xargs grep -n --color=auto $*'
-alias greph='find . -name "*.h" |xargs grep -n --color=auto $*'
-alias test_migrate='JUMP_DB_NAME=test_nectar python manage.py migrate'
+alias grepy='find . -name "*.py" |xargs grep -n --color=auto $* 2>/dev/null'
+alias grepjs='find . -name "*.js" |xargs grep -n --color=auto $* 2>/dev/null'
+alias grepch='find . -name "*.cpp" -o -name "*.c" -o -name "*.h" |xargs grep -n --color=auto $* 2>/dev/null'
+alias greph='find . -name "*.h" |xargs grep -n --color=auto $* 2>/dev/null'
+alias grepc='find . -name "*.cpp" -o -name "*.c"  |xargs grep -n --color=auto $* 2>/dev/null'
 alias print_colors='for ((color = 0; color <= 255; color++)); do tput setaf "$color"; printf "$color test\n"; done'
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
