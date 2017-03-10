@@ -2,26 +2,7 @@
 " Note: Skip initialization for vim-tiny or vim-small.
  if 0 | endif
 
-"NeoBundle Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-set runtimepath^=/home/encelium/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('/home/encelium/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-call neobundle#end()
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
-
-
 
 "******************* VIM directories *******************
 if has('win32') || has ('win64')
@@ -43,37 +24,14 @@ if !isdirectory($SWAPDIR)
 endif
 set directory=$SWAPDIR
 
-"******************* NEOBUNDLE *******************
-if isdirectory($VIMHOME."/bundle/neobundle.vim")
- if has('vim_starting')
-   set runtimepath+=$VIMHOME."/bundle/neobundle.vim"
- endif
-
- call neobundle#begin(expand($VIMHOME.'/bundle/'))
-
- NeoBundleFetch 'Shougo/neobundle.vim'  " Let NeoBundle manage NeoBundle
-
- "  MY BUNDLES
-" NeoBundle 'jonathanfilip/vim-lucius'
-" NeoBundle 'kien/ctrlp.vim'
- NeoBundle 'klen/python-mode'
- NeoBundle 'scrooloose/syntastic'
- NeoBundle 'bling/vim-airline'
- NeoBundle 'mileszs/ack.vim'
-" NeoBundle 'digitaltoad/vim-jade'
-" NeoBundle 'pangloss/vim-javascript'
-" NeoBundle 'maksimr/vim-jsbeautify'
-" NeoBundle 'ervandew/supertab'
-" NeoBundle 'saltstack/salt-vim'
-" NeoBundle 'scrooloose/nerdtree'
-
- call neobundle#end()
-
- " If there are uninstalled bundles found on startup,
- " this will conveniently prompt you to install them.
- NeoBundleCheck
-endif
-
+call plug#begin($VIMHOME.'/plugged')
+Plug 'kien/ctrlp.vim'
+" NeoBundle 'klen/python-mode'
+Plug 'scrooloose/syntastic'
+Plug 'bling/vim-airline'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+call plug#end()
 
 if has("gui_running")
     "******************* colorscheme *******************
@@ -89,7 +47,11 @@ if has("gui_running")
     :map <C-tab> :tabnext<cr>
     "au GUIEnter * simalt ~x
     set guioptions-=T" no toolbar
-    set guifont=Mono
+    if has('win32') || has ('win64')
+        set guifont=Courier_New:h11
+    else
+        set guifont=Mono
+    endif    
 else
 
     "******************* colorscheme *******************
@@ -175,8 +137,13 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 set tags=tags;/ " search for ctags in the current directory up to root
 
 " regenerate ctags
-map <F8> :!/usr/bin/ctags -R .<CR>
-let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+if has('win32') || has ('win64')
+map <F8> :!/Progra~2/vim/ctags -R .<CR>
+let Tlist_Ctags_Cmd = "$VIMRUNTIME/ctags"
+else
+	map <F8> :!/usr/bin/ctags -R .<CR>
+	let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+endif
 let Tlist_WinWidth = 30
 map <F4> :TlistToggle<cr>
 map <F2> :lnext<cr>
@@ -184,7 +151,7 @@ map <F2> :lnext<cr>
 "******************* style formatting control  *******************
 " highlight extra long lines
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%91v.*/
+match OverLength /\%101v.*/
 
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=55 ctermfg=white guibg=#592929
@@ -206,34 +173,21 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_pylint_post_args="--max-line-length=120"
+let g:pymode_options_colorcolumn = 0
 
 
 
 "********************************************************************
-" *********************** CONAN section *****************************
-"
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-"
-
-" Use fuzzy finder buffer mode to open buffer
-"nmap <C-S-F> :PyLintAuto<CR>
-"map <Leader>d :CtrlP .<CR>
-"map <Leader>f :CtrlPBuffer<CR>
-set wildignore+=*/coverage/*,*/build/*,*/node_modules/*,*/__pycache__/*,*.ttf,*.svg,*.pyc,*/build-debug/*
-" map <Leader>d :FufFileWithCurrentBufferDir<CR>
-
-
 "******************* pyflakes  *******************
 let g:pyflakes_use_quickfix = 0
 
 
-"******************* python mode  *******************
-let g:pymode_rope_goto_definition_bind = '<F3>'
-let g:pymode_rope_goto_definition_cmd = 'e'
-let g:pymode_rope_complete_on_dot = 0
+""******************* python mode  *******************
+"let g:pymode_rope_goto_definition_bind = '<F3>'
+"let g:pymode_rope_goto_definition_cmd = 'e'
+"let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope=0
 " Do not let pymode automatically fold
 let g:pymode_folding = 1
 set foldlevel=99
@@ -245,22 +199,6 @@ let g:pymode_lint_checkers = '[pyflakes,mccabe]'
 
 " DO NOT Auto open cwindow if errors be finded
 let g:pymode_lint_cwindow = 0
-
-"******************* supertab  *******************
-"imap <tab> <C-Space>
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-"let g:SupertabDefaultCompletionType = "context"
-"let g:SuperTabClosePreviewOnPopupClose = 1
-"set completeopt=menuone,longest,preview
-"
-"" This auto close preview window if you exit the insert mode
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-"set relativenumber
-
-" run unittest
-"nmap <Leader>t :!python3 manage.py test <cword>
-
 
 "******************* airline  *******************
 let g:airline#extensions#tabline#enabled = 0
@@ -276,8 +214,8 @@ set laststatus=2
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" " C-n to toggle
-" map <C-n> :NERDTreeToggle<CR>
-"
-" " Close vim if Nerd tree is the only window open
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" C-n to toggle
+map <C-n> :NERDTreeToggle<CR>
+
+" Close vim if Nerd tree is the only window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
