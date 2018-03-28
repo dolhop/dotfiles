@@ -94,7 +94,7 @@ alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
 alias lh='ls $LS_OPTIONS *.h'
 alias lc='ls $LS_OPTIONS *.cpp *.c'
-alias vless='/usr/share/vim/vim74/macros/less.sh'
+alias vless='/usr/share/vim/vim80/macros/less.sh'
 alias svds='svn diff --diff-cmd $HOME/bin/svnvimdiff'
 alias svdb='svn diff --diff-cmd $HOME/bin/bcdiff.sh'
 alias svd='svn diff|vless'
@@ -114,6 +114,9 @@ alias greph='find . -name "*.h" |xargs grep -n --color=auto $* 2>/dev/null'
 alias grepc='find . -name "*.cpp" -o -name "*.c"  |xargs grep -n --color=auto $* 2>/dev/null'
 alias print_colors='for ((color = 0; color <= 255; color++)); do tput setaf "$color"; printf "$color test\n"; done'
 alias svnst='svn st |grep -v external |grep -v "^\s*X" |grep -v "^\s*$"'
+alias lg='git log --all --decorate --oneline --graph'
+alias gsmu='git submodule update --recursive --remote'
+alias svnclean='svn status --no-ignore | grep '^[I?]' | cut -c 9- | while IFS= read -r f; do rm -rf "$f"; done'
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel

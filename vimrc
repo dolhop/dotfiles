@@ -11,7 +11,7 @@ else
     let $VIMHOME = $HOME."/.vim"
 endif
 
-" change the location of vi temp/swap files
+" ****************** SWAP FILE LOCATIONS **************
 let $BACKUPDIR=$VIMHOME."/backups"
 if !isdirectory($BACKUPDIR)
     call mkdir($BACKUPDIR, "p")
@@ -24,13 +24,14 @@ if !isdirectory($SWAPDIR)
 endif
 set directory=$SWAPDIR
 
+
+"*********************  PLUGIN MANAGEMENT
 call plug#begin($VIMHOME.'/plugged')
 Plug 'kien/ctrlp.vim'
-" NeoBundle 'klen/python-mode'
-Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'w0rp/ale'
 call plug#end()
 
 if has("gui_running")
@@ -51,7 +52,7 @@ if has("gui_running")
         set guifont=Courier_New:h11
     else
         set guifont=Mono
-    endif    
+    endif
 else
 
     "******************* colorscheme *******************
@@ -107,6 +108,7 @@ set tabstop=4        " tabstops to 4
 set shiftwidth=4     " tabs are worth 4 spaces
 set expandtab        " use spaces instead of tabs
 set foldmethod=indent
+set foldlevel=99
 set showmatch       " jump to matching parentheis
 set tabpagemax=99
 set ruler           " show the line and column position at all times
@@ -162,43 +164,19 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd BufWritePre * :%s/\s\+$//e
 
 
-"******************* syntastic  *******************
-" highlight extra long lines
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+"******************* ALE  *******************
+" Check Python files with flake8 and pylint.
+let b:ale_linters = ['flake8'] ", 'pylint']
+" Fix Python files with autopep8 and yapf.
+let b:ale_fixers = ['autopep8', 'yapf']
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_pylint_post_args="--max-line-length=120"
-let g:pymode_options_colorcolumn = 0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%:%code%] %s [%severity%]'
 
-
-
-"********************************************************************
 "******************* pyflakes  *******************
 let g:pyflakes_use_quickfix = 0
 
-
-""******************* python mode  *******************
-"let g:pymode_rope_goto_definition_bind = '<F3>'
-"let g:pymode_rope_goto_definition_cmd = 'e'
-"let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope=0
-" Do not let pymode automatically fold
-let g:pymode_folding = 1
-set foldlevel=99
-
-" Do not let pymode auto fix whitespaces
-let g:pymode_utils_whitespaces = 0
-let g:pymode_lint_write = 0
-let g:pymode_lint_checkers = '[pyflakes,mccabe]'
-
-" DO NOT Auto open cwindow if errors be finded
-let g:pymode_lint_cwindow = 0
 
 "******************* airline  *******************
 let g:airline#extensions#tabline#enabled = 0
