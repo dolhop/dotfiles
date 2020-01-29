@@ -117,6 +117,9 @@ alias svnst='svn st |grep -v external |grep -v "^\s*X" |grep -v "^\s*$"'
 alias lg='git log --all --decorate --oneline --graph'
 alias gsmu='git submodule update --recursive --remote'
 alias svnclean='svn status --no-ignore | grep '^[I?]' | cut -c 9- | while IFS= read -r f; do rm -rf "$f"; done'
+alias youtube-audio='youtube-dl --add-metadata --restrict-filenames --ignore-errors --extract-audio --audio-quality 0 --audio-format mp3 -o "%(track)s__%(artist)s.%(ext)s"'
+alias ya='youtube-dl --add-metadata --restrict-filenames --ignore-errors --extract-audio --audio-quality 0 --audio-format mp3 -o "%(track)s__%(artist)s.%(ext)s"'
+
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
