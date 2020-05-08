@@ -25,21 +25,20 @@ endif
 set directory=$SWAPDIR
 
 
-"*********************  PLUGIN MANAGEMENT
+"*********************  PLUGIN MANAGEMENT - uses vim-plug: install using:
+"   curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"   then run :PlugInstall
 call plug#begin($VIMHOME.'/plugged')
 Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale'     " used for flake8 linting - might need to install flake8 separately
 call plug#end()
 
 if has("gui_running")
     "******************* colorscheme *******************
     colorscheme darkblue    " default colorscheme
-    if filereadable($VIMHOME."/colors/argonaut.vim")
-        colorscheme argonaut
-    endif
 
     "******************* tab control *******************
     :map <C-Left> :tabprevious<cr>
@@ -58,9 +57,6 @@ else
     "******************* colorscheme *******************
     set t_Co=256
     colorscheme delek   " default colorscheme
-    if filereadable($VIMHOME."/colors/argonaut.vim")
-        colorscheme argonaut
-    endif
 
     "******************* tab control *******************
     " some chars don't pass through in putty - thus we have to actually type
@@ -90,6 +86,12 @@ else
     "set clipboard=autoselect,exclude:.*
     set clipboard=unnamed
 endif   " console mode
+
+if filereadable($VIMHOME."/colors/argonaut.vim")
+    " copy this from Dotfiles directory
+    colorscheme argonaut
+endif
+
 
 "******************* misc control  *******************
 set wildmenu        " nice menu at bottom of screen
