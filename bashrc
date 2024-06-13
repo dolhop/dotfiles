@@ -85,7 +85,12 @@ export LS_OPTIONS='--color=auto -F'
 export TERM=xterm-256color
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
-export PS1="\r\n${GREEN}# ${YELLOW}\u@\h ${LIGHT_BLUE}\w ${LIGHT_RED}\$(__git_ps1)\r\n${GREEN}#${DEFAULT} ";
+if [ `id -u` -eq 0 ]  # root
+then
+    export PS1="\r\n${GREEN}# ${LIGHT_RED}\u@\h ${LIGHT_BLUE}\w ${LIGHT_RED}\$(__git_ps1)\r\n${GREEN}#${DEFAULT} ";
+else
+    export PS1="\r\n${GREEN}# ${YELLOW}\u@\h ${LIGHT_BLUE}\w ${LIGHT_RED}\$(__git_ps1)\r\n${GREEN}#${DEFAULT} ";
+fi
 
 PATH="$PATH:$HOME/.bin:$HOME/.local/bin"; export PATH
 
