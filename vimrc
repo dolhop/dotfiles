@@ -117,6 +117,7 @@ set ruler           " show the line and column position at all times
 set hlsearch        " highlight serach terms
 set incsearch       " jump to search matches as you type
 set history=1000
+set colorcolumn=80  " marker for 80 column
 set cursorline
 set switchbuf+=usetab,newtab " use new tab from quickfix list
 set t_ut=

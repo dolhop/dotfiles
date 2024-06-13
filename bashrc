@@ -58,23 +58,23 @@ export NVM_DIR="/home/ubuntu/.nvm"
 ################################################################################
 #			LWT
 # colours!
-BLACK="\[\e[0;30m"
-BLUE="\[\e[0;34m"
-GREEN="\[\e[0;32m"
-CYAN="\[\e[0;36m"
-RED="\[\e[0;31m"
-PURPLE="\[\e[0;35m"
-BROWN="\[\e[0;33m"
-LIGHT_GRAY="\[\e[0;37m"
-DARK_GRAY="\[\e[1;30m"
-LIGHT_BLUE="\[\e[1;34m"
-LIGHT_GREEN="\[\e[1;32m"
-LIGHT_CYAN="\[\e[1;36m"
-LIGHT_RED="\[\e[1;31m"
-LIGHT_PURPLE="\[\e[1;35m"
-YELLOW="\[\e[1;33m"
-WHITE="\[\e[1;37m"
-DEFAULT="\[\e[0;39m"
+BLACK="\[\e[0;30m\]"
+BLUE="\[\e[0;34m\]"
+GREEN="\[\e[0;32m\]"
+CYAN="\[\e[0;36m\]"
+RED="\[\e[0;31m\]"
+PURPLE="\[\e[0;35m\]"
+BROWN="\[\e[0;33m\]"
+LIGHT_GRAY="\[\e[0;37m\]"
+DARK_GRAY="\[\e[1;30m\]"
+LIGHT_BLUE="\[\e[1;34m\]"
+LIGHT_GREEN="\[\e[1;32m\]"
+LIGHT_CYAN="\[\e[1;36m\]"
+LIGHT_RED="\[\e[1;31m\]"
+LIGHT_PURPLE="\[\e[1;35m\]"
+YELLOW="\[\e[1;33m\]"
+WHITE="\[\e[1;37m\]"
+DEFAULT="\[\e[0;39m\]"
 
 
 set -o vi  # vim style editing of command line
@@ -85,8 +85,9 @@ export LS_OPTIONS='--color=auto -F'
 export TERM=xterm-256color
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
-PS1="\r\n${GREEN}\]# ${YELLOW}\]\u@\h ${LIGHT_BLUE}\]\w\r\n${GREEN}\]#${DEFAULT}\] ";        export PS1
-PATH="$PATH:$HOME/.bin"; export PATH
+export PS1="\r\n${GREEN}# ${YELLOW}\u@\h ${LIGHT_BLUE}\w ${LIGHT_RED}\$(__git_ps1)\r\n${GREEN}#${DEFAULT} ";
+
+PATH="$PATH:$HOME/.bin:$HOME/.local/bin"; export PATH
 
 # eval "`dircolors`"
 alias ls='ls $LS_OPTIONS'
@@ -117,8 +118,8 @@ alias svnst='svn st |grep -v external |grep -v "^\s*X" |grep -v "^\s*$"'
 alias lg='git log --all --decorate --oneline --graph'
 alias gsmu='git submodule update --recursive --remote'
 alias svnclean='svn status --no-ignore | grep '^[I?]' | cut -c 9- | while IFS= read -r f; do rm -rf "$f"; done'
-alias youtube-audio='youtube-dl --add-metadata --restrict-filenames --ignore-errors --extract-audio --audio-quality 0 --audio-format mp3 -o "%(track)s__%(artist)s.%(ext)s"'
-alias ya='youtube-dl --add-metadata --restrict-filenames --ignore-errors --extract-audio --audio-quality 0 --audio-format mp3 -o "%(track)s__%(artist)s.%(ext)s"'
+alias youtube-audio='yt-dlp --add-metadata --restrict-filenames --ignore-errors --extract-audio --audio-quality 0 --audio-format mp3'
+alias ya='yt-dlp --add-metadata --restrict-filenames --ignore-errors --extract-audio --audio-quality 0 --audio-format mp3'
 
 
 export WORKON_HOME=$HOME/.virtualenvs
